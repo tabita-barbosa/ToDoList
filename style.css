@@ -93,3 +93,8 @@ body {
     text-transform: uppercase;
     font-weight: bold;
 } 
+
+.itemConcluido {
+    text-decoration: line-through;
+    color: blue;
+}
