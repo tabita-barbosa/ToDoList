@@ -96,5 +96,5 @@ body {
 
 .itemConcluido {
     text-decoration: line-through;
-    color: blue;
+    color: #ccc;
 }

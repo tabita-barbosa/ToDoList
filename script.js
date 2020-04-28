@@ -1,8 +1,8 @@
 // ## Requisitos
 //     OK 1- Adicionar itens na lista (ta sobrescrevendo)
 //     OK 2- Marcar itens concluídos individualmente
-//    3 - Excluir itens individualmente
-//   OK 4 - Validar campo de texto para não entrar itens vazios (falta o espaço)
+//    OK 3 - Excluir itens individualmente
+//   OK 4 - Validar campo de texto para não entrar itens vazios 
 //     5 - Limpar campo de texto depois que insere o item na lista
 
 
@@ -19,16 +19,50 @@ window.addEventListener('DOMContentLoaded', function () {
     const lista = document.querySelector('#todoLista')
     // console.log (lista)
 
-    let item = document.createElement('li')
 
-    //     - Adicionar itens na lista
+    //criando botão para excluir item
+    const botaoExcluir = document.createElement('button')
+    botaoExcluir.innerText = 'X'
+
+    //criando a div do item da lista
+    // const divTarefas = document.querySelector('#todoTarefas')
+
+    const item = document.createElement('li')
+
     function addItens(e) {
-        if (input.value !== '' && input.value !== ' ') {
+        // 4- validar input não vazio
+        if (input.value.trim()!== '') {
             e.preventDefault()
             item.innerText = input.value
             lista.appendChild(item)
+            // console.log (item)
+                        
+            item.appendChild(botaoExcluir)
+            // console.log (botaoExcluir)
+
+            // 5- resetar input
+            // input.reset()
+        } else {
+            alert ('Escreva uma tarefa!')
         }
     }
+
+    
+    //resolução com for
+    // function addItens(e) {
+    //     for (i = lista.length - 1; i >= 0; i--) {
+    //         if (input.value.length !== 0 || input.value.trim()) {
+    //             e.preventDefault()
+    //             item.innerText = input.value
+    //             item = (lista[i])
+    //             lista.appendChild(item)
+    //             // console.log (item)
+
+    //             item.appendChild(botaoExcluir)
+    //             // console.log (botaoExcluir)
+    //         }
+    //     }
+    // }
 
     addTarefas.addEventListener('click', addItens)
 
@@ -39,7 +73,18 @@ window.addEventListener('DOMContentLoaded', function () {
     }
 
     item.addEventListener('click', itemConcluido)
- 
+
+    //3 - Excluir itens individualmente
+
+    function excluirItem (){
+        lista.removeChild (item)
+    }
+
+    botaoExcluir.addEventListener ('click', excluirItem)
+
+
+
+
 
 
 
