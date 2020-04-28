@@ -16,34 +16,36 @@ window.addEventListener('DOMContentLoaded', function () {
     const addTarefas = document.querySelector('#todoSubmit')
     // console.log (addTarefas)
 
-    const lista = document.querySelector('#todoLista')
-    // console.log (lista)
-
-
 
     //criando a div do item da lista
     // const divTarefas = document.querySelector('#todoTarefas')
 
 
     function addItens() {
-        // 4- validar input não vazio
+        const lista = document.querySelector('#todoLista')
+        // console.log (lista)
         const item = document.createElement('li')
         const botaoExcluir = document.createElement('button')
+        const form = document.querySelector('form')
+
+        
+        // 4- validar input não vazio
         if (input.value.trim() !== '') {
             item.innerText = input.value
             lista.appendChild(item)
-            console.log(item)
+            // console.log(item)
 
-            //criando botão para excluir item
+            //criar botão para excluir item
             botaoExcluir.innerText = 'X'
             item.appendChild(botaoExcluir)
             // console.log (botaoExcluir)
 
-            // 5- resetar input
-            // input.reset()
+            //resetar input
+            form.reset()
         } else {
             alert('Escreva uma tarefa!')
         }
+
         // Marcar itens concluídos individualmente
         function itemConcluido() {
             item.classList.add('itemConcluido');
@@ -71,7 +73,7 @@ window.addEventListener('DOMContentLoaded', function () {
         const botaoLimparTodos = document.querySelector('#todoRemoverTodos')
 
         function limparTodos() {
-            item.innerText = ''
+            lista.removeChild(item)
         }
 
         botaoLimparTodos.addEventListener('click', limparTodos)
