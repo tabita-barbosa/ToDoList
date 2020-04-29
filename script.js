@@ -26,9 +26,10 @@ window.addEventListener('DOMContentLoaded', function () {
         // console.log (lista)
         const item = document.createElement('li')
         const botaoExcluir = document.createElement('button')
+        const divBotaoExcluir = document.createElement ('div')
         const form = document.querySelector('form')
 
-        
+
         // 4- validar input não vazio
         if (input.value.trim() !== '') {
             item.innerText = input.value
@@ -37,7 +38,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
             //criar botão para excluir item
             botaoExcluir.innerText = 'X'
-            item.appendChild(botaoExcluir)
+            item.appendChild(divBotaoExcluir)
+            divBotaoExcluir.appendChild (botaoExcluir)
             // console.log (botaoExcluir)
 
             //resetar input
@@ -47,12 +49,17 @@ window.addEventListener('DOMContentLoaded', function () {
         }
 
         // Marcar itens concluídos individualmente
-        function itemConcluido() {
-            item.classList.add('itemConcluido');
+        // function itemConcluido() {
+        //     item.classList.add('itemConcluido');
+        // }
+
+        function esconder() {
+            item.classList.toggle('itemConcluido')
         }
+        item.addEventListener('click', esconder);
 
-        item.addEventListener('click', itemConcluido)
-
+        // item.addEventListener('click', itemConcluido)
+        // item.toggle(itemConcluido)
 
         //3 - Excluir itens individualmente
 
@@ -64,11 +71,8 @@ window.addEventListener('DOMContentLoaded', function () {
         botaoExcluir.addEventListener('click', excluirItem)
 
         // **BÔNUS**
-
         // - Marcar todos os itens como feito
         // - Excluir todos os itens da lista   
-
-
         const botaoMarcarTodos = document.querySelector('#todoMarcarTodos')
         const botaoLimparTodos = document.querySelector('#todoRemoverTodos')
 
@@ -79,12 +83,12 @@ window.addEventListener('DOMContentLoaded', function () {
         botaoLimparTodos.addEventListener('click', limparTodos)
 
 
-        function marcarTodos() {
+        // function marcarTodos() {
 
-            lista.classList.add('itemConcluido')
-        }
+        //     lista.classList.add('itemConcluido')
+        // }
 
-        botaoMarcarTodos.addEventListener('click', marcarTodos)
+        botaoMarcarTodos.addEventListener('click', esconder)
 
     }
 
