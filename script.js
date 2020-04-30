@@ -3,13 +3,12 @@
 //     OK 2- Marcar itens concluídos individualmente
 //    OK 3 - Excluir itens individualmente
 //   OK 4 - Validar campo de texto para não entrar itens vazios 
-//     5 - Limpar campo de texto depois que insere o item na lista
+//   OK 5 - Limpar campo de texto depois que insere o item na lista
 
-
-// selecionando os elementos do html para manipular os evento
 
 window.addEventListener('DOMContentLoaded', function () {
 
+    // selecionando os elementos do html para manipular os evento
     const input = document.querySelector('#todoInput')
     // console.log (input)
 
@@ -28,7 +27,6 @@ window.addEventListener('DOMContentLoaded', function () {
         const botaoExcluir = document.createElement('button')
         const divBotaoExcluir = document.createElement('div')
         const form = document.querySelector('form')
-
 
 
         // 4- validar input não vazio
@@ -50,20 +48,13 @@ window.addEventListener('DOMContentLoaded', function () {
         }
 
         // Marcar itens concluídos individualmente
-        // function itemConcluido() {
-        //     item.classList.add('itemConcluido');
-        // }
-
         function esconder() {
             item.classList.toggle('itemConcluido')
         }
         item.addEventListener('click', esconder);
 
-        // item.addEventListener('click', itemConcluido)
-        // item.toggle(itemConcluido)
 
         //3 - Excluir itens individualmente
-
         function excluirItem() {
             lista.removeChild(item)
 
@@ -86,9 +77,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
         botaoMarcarTodos.addEventListener('click', esconder)
 
+        //- Reorganizar a ordem "arrastando" os cards utilizando drag and drop, atribui o draggable para todo li criado
         let dragging = null
 
-        //- Reorganizar a ordem "arrastando" os cards utilizando drag and drop, atribui o draggable para todo li criado
         item.setAttribute('draggable', true)
         lista.setAttribute('draggable', true)
         divTarefas.setAttribute('draggable', true)
@@ -105,13 +96,17 @@ window.addEventListener('DOMContentLoaded', function () {
             //permite que o elemento seja arrastado, pois o padrão é agarrar e soltar
             const node = e.target.closest('li')
             this.insertBefore(dragging, node)
-            
+            item.style.opacity = .5
+            // lista.style.backgroundColor = 'gray'
+
         })
 
         //finaliza o ato de arrastar
         lista.addEventListener('dragend', function (e) {
             dragging = null
             //permite pegar outro elemento pra arrastar
+            item.style.opacity = ''
+            // lista.style.backgroundColor ='white'
         })
 
     }
@@ -124,29 +119,5 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
 
-
-
-
-
 })
 
-
-
-
-
-
-//resolução com for
-    // function addItens(e) {
-        //     for (i = lista.length - 1; i >= 0; i--) {
-            //         if (input.value.trim() !== '') {
-                //             e.preventDefault()
-                //             item.innerText = input.value
-                //             item = (lista[i])
-                //             lista.appendChild(item)
-                //             // console.log (item)
-
-                //             item.appendChild(botaoExcluir)
-                //             // console.log (botaoExcluir)
-                //         }
-                //     }
-                // }
