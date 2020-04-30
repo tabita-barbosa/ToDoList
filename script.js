@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
     //criando a div do item da lista
-    // const divTarefas = document.querySelector('#todoTarefas')
+    const divTarefas = document.querySelector('#todoTarefas')
 
 
     function addItens() {
@@ -26,8 +26,9 @@ window.addEventListener('DOMContentLoaded', function () {
         // console.log (lista)
         const item = document.createElement('li')
         const botaoExcluir = document.createElement('button')
-        const divBotaoExcluir = document.createElement ('div')
+        const divBotaoExcluir = document.createElement('div')
         const form = document.querySelector('form')
+
 
 
         // 4- validar input não vazio
@@ -39,7 +40,7 @@ window.addEventListener('DOMContentLoaded', function () {
             //criar botão para excluir item
             botaoExcluir.innerText = 'X'
             item.appendChild(divBotaoExcluir)
-            divBotaoExcluir.appendChild (botaoExcluir)
+            divBotaoExcluir.appendChild(botaoExcluir)
             // console.log (botaoExcluir)
 
             //resetar input
@@ -83,21 +84,46 @@ window.addEventListener('DOMContentLoaded', function () {
         botaoLimparTodos.addEventListener('click', limparTodos)
 
 
-        // function marcarTodos() {
-
-        //     lista.classList.add('itemConcluido')
-        // }
-
         botaoMarcarTodos.addEventListener('click', esconder)
 
-    }
+        let dragging = null
 
+        //- Reorganizar a ordem "arrastando" os cards utilizando drag and drop, atribui o draggable para todo li criado
+        item.setAttribute('draggable', true)
+        lista.setAttribute('draggable', true)
+        divTarefas.setAttribute('draggable', true)
+
+        //Add evento ao <ul>
+        lista.addEventListener('dragstart', function (e) {
+            dragging = e.target.closest('li')
+            //closest pega o elementomais proximo da caixa principal que o evento foi add
+        })
+
+        //dragoverarrasta o elemento.
+        lista.addEventListener('dragover', function (e) {
+            e.preventDefault()
+            //permite que o elemento seja arrastado, pois o padrão é agarrar e soltar
+            const node = e.target.closest('li')
+            this.insertBefore(dragging, node)
+            
+        })
+
+        //finaliza o ato de arrastar
+        lista.addEventListener('dragend', function (e) {
+            dragging = null
+            //permite pegar outro elemento pra arrastar
+        })
+
+    }
 
 
     addTarefas.addEventListener('click', function (e) {
         e.preventDefault()
         addItens()
     })
+
+
+
 
 
 
